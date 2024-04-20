@@ -6,4 +6,4 @@ COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 COPY backend/ .
 
-CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=80
+CMD python3 -m uvicorn app:app --port=8080
