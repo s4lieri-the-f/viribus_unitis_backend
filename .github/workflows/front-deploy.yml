@@ -29,4 +29,4 @@ jobs:
         run: docker build -t viribus-frontend frontend/
 
       - name: Run Docker container
-        run: docker run -d -p 80:8080 --name frontend viribus-frontend
+        run: docker run -d -p 8081:8080 --name frontend viribus-frontend
