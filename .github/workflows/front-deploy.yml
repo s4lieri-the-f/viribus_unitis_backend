@@ -1,0 +1,32 @@
+# This is a basic workflow to help you get started with Actions
+
+name: front-deploy-ci
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: ["master"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build_and_deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Clear prev Dockefile
+        run: |
+          docker stop frontend
+          docker remove frontend
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t viribus-frontend frontend/
+
+      - name: Run Docker container
+        run: docker run -d -p 80:8080 --name frontend viribus-frontend
