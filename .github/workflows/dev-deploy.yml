@@ -20,7 +20,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Clear prev Dockefile
-        run: docker remove viribus_unitis
+        run: |
+          docker stop viribus_unitis
+          docker remove viribus_unitis
 
       - name: Checkout repository
         uses: actions/checkout@v3
